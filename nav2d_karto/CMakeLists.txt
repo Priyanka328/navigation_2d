@@ -14,12 +14,11 @@ find_package(catkin REQUIRED COMPONENTS
   nav2d_localizer
 )
 
-list(APPEND CMAKE_MODULE_PATH ${nav2d_karto_SOURCE_DIR}/cmake_modules)
+
 
 find_package(PkgConfig REQUIRED)
 find_package(Eigen3 REQUIRED)
-find_package(CSparse REQUIRED)
-find_package(Cholmod)
+
 
 # Use Thread-Building-Blocks [OpenKarto]
 pkg_check_modules(TBB tbb)
@@ -37,8 +36,7 @@ endif(CHOLMOD_FOUND)
 catkin_package(
  INCLUDE_DIRS include
  LIBRARIES OpenKarto MultiMapper
- CATKIN_DEPENDS roscpp tf nav_msgs geometry_msgs visualization_msgs nav2d_msgs nav2d_localizer 
- DEPENDS Eigen3
+ CATKIN_DEPENDS roscpp tf nav_msgs geometry_msgs visualization_msgs nav2d_msgs nav2d_localizer
 )
 
 ###########
@@ -48,7 +46,7 @@ catkin_package(
 ## Your package locations should be listed before other locations
 include_directories(
   OpenKarto/source
-  ${EIGEN3_INCLUDE_DIR}
+
   ${TBB_INCLUDE_DIRS}
 )
 
@@ -98,12 +96,12 @@ include_directories(
   include
   include/${PROJECT_NAME}
   OpenKarto/source
-  ${EIGEN3_INCLUDE_DIR}
+ 
   ${CSPARSE_INCLUDE_DIR}
   ${catkin_INCLUDE_DIRS}
 )
 add_library(MultiMapper src/MultiMapper.cpp)
-target_link_libraries(MultiMapper OpenKarto ${catkin_LIBRARIES})
+target_link_libraries(MultiMapper OpenKarto Eigen3::Eigen ${catkin_LIBRARIES})
 
 ## Build the mapper-node executable
 set(MAPPER_INCLUDE_FILES )
@@ -112,7 +110,7 @@ set(MAPPER_SOURCE_FILES )
 include_directories(
 	include
 	OpenKarto/source
-	${EIGEN3_INCLUDE_DIR}
+
 )
 
 add_executable(mapper

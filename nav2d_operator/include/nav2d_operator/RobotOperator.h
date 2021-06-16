@@ -6,7 +6,7 @@
 #define CONTROL_TOPIC "cmd_vel"
 #define ROUTE_TOPIC   "route"
 #define PLAN_TOPIC    "desired"
-#define LUT_RESOLUTION 100
+#define LUT_RESOLUTION 1000
 
 #include <ros/ros.h>
 #include <costmap_2d/costmap_2d_ros.h>
